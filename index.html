@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Birthday Greeting</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f7d2d2;
+      font-family: "Edu NSW ACT Foundation", sans-serif; /* Mengubah font menjadi Edu NSW ACT Foundation */
+    }
+
+    #greeting-box {
+      position: relative;
+      width: 350px;
+      height: 600px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      text-align: center;
+    }
+
+    #animation-container {
+      position: absolute;
+      top: 35%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      display: block;
+    }
+
+    #message-container {
+      position: absolute;
+      bottom: 100px;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #e8491d;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    #valentine-animation {
+      width: 250px;
+      height: auto;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="greeting-box">
+    <div id="animation-container">
+      <img src="stiker_1.gif" alt="Birthday Animation" id="valentine-animation">
+    </div>
+    <div id="message-container">
+      <p id="greeting-message">Happy Birthday, My Beloved!🎉🎂</p>
+      <button onclick="prevMessage()" id="prevButton" style="display:none">Previous</button>
+      <button onclick="changeAnimation()">Next</button>
+    </div>
+  </div>
+
+  <audio id="bg-music" loop>
+    <source src="happyBirthday.mp3" type="audio/mp3">
+  </audio>
+
+  <script>
+    const animations = [
+      'Stiker_2.gif',
+      'stiker_3.gif',
+      'stiker_5.gif',
+      'stiker_1.gif',
+      'stiker_4.gif',
+      // Add more animation URLs as needed
+    ];
+
+    const messages = [
+      "Happy Birthday, my beloved! May your special day be filled with joy and love!🎉🎂",
+      "On your birthday, I just want to express how grateful I am to have you in my life. Happy Birthday, my love!🎈🎂",
+      "Wishing the happiest of birthdays to the most amazing person in my life. I love you more than words can say!🎉🎂",
+      "Happy Birthday to the one who brings endless happiness and love into my life. I cherish every moment with you.🎈🎂",
+      "You mean everything to me, and I'm so thankful for your presence in my life. Happy Birthday, my dear!🎉🎂"
+      // Add more messages as needed
+    ];
+
+    let currentAnimationIndex = 0;
+    const animationElement = document.getElementById('valentine-animation');
+    const greetingMessageElement = document.getElementById('greeting-message');
+    const prevButton = document.getElementById('prevButton');
+    const bgMusic = document.getElementById('bg-music');
+
+    function changeAnimation() {
+      if (currentAnimationIndex === 0) {
+        bgMusic.play(); // Play background music on the first animation change
+      }
+      prevButton.style.display = 'inline-block';
+      currentAnimationIndex = (currentAnimationIndex + 1) % animations.length;
+      animationElement.src = animations[currentAnimationIndex];
+      greetingMessageElement.innerHTML = messages[currentAnimationIndex];
+    }
+
+    function prevMessage() {
+      currentAnimationIndex = (currentAnimationIndex - 1 + animations.length) % animations.length;
+      animationElement.src = animations[currentAnimationIndex];
+      greetingMessageElement.innerHTML = messages[currentAnimationIndex];
+      if (currentAnimationIndex === 0) {
+        prevButton.style.display = 'none';
+      }
+    }
+  </script>
+
+</body>
+
+</html>
